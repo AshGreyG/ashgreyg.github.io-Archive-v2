@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="file:////home/ashgrey/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.8.15/crossnote/dependencies/katex/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
       
       
       
@@ -26,9 +26,12 @@
 }
 @media screen and (max-width: 914px) {
   html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
-    left: 25%;
-    width: 75%;
+    left: 50%;
+    width: 100%;
     padding: 2em;
+  }
+  html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc {
+    width: 50% !important;
   }
 }
 html {
@@ -116,9 +119,15 @@ html {
 .markdown-preview.markdown-preview pre[class*="language-"] code .builtin {
   color: #ca88c4;
 }
+.markdown-preview.markdown-preview .footnotes-sep {
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview a {
+  color: #89b4fa;
+}
 html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc {
   box-shadow: 0 0 0 0 !important;
-  width: 25% !important;
+  width: 25%;
   background-color: #1e1e2e !important;
 }
 html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a {

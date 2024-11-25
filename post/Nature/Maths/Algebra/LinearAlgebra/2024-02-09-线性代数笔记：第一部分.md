@@ -1,6 +1,7 @@
 ---
 html:
-  offline: true
+  offline: false
+  cdn_hosted: true
 export_on_save:
   html: true
 ---
