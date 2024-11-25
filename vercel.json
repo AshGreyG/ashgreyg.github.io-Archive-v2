@@ -1,8 +1,8 @@
 {
     "rewrites": [
         {
-            "source": "/posts/(*)/(.*/{0}).md)",
-            "destination": "/posts/$1/$2.html"
+            "source": "/posts/:path*/:name(.*/{0}).md)",
+            "destination": "/posts/:path*/:name.html"
         }
     ]
 }
