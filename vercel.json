@@ -1,8 +1,8 @@
 {
-    "rewrites": [
+    "redirects": [
         {
-            "source": "/post/:path(*)/:name.md",
-            "destination": "/post/:path*/:name.html"
+            "source": "/post/:path(.*)/:name\\.md",
+            "destination": "/post/:path/:name\\.html"
         }
     ]
 }
