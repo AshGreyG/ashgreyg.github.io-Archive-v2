@@ -1,0 +1,511 @@
+<!DOCTYPE html><html><head>
+      <title>2024-07-20-constexpr家族限定符的作用</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////home/ashgrey/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.8.15/crossnote/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@media screen and (min-width: 914px) {
+  html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+    padding: 2em calc(25% + 2em);
+  }
+  html body[for="html-export"]:not([data-presentation])[html-show-sidebar-toc] .markdown-preview {
+    left: 25%;
+    width: 75%;
+    padding-left: 2em;
+    padding-right: calc(25% + 2em);
+  }
+}
+@media screen and (max-width: 914px) {
+  html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
+    left: 25%;
+    width: 75%;
+    padding: 2em;
+  }
+}
+html {
+  scrollbar-color: #89dceb #1e1e2e;
+}
+.markdown-preview.markdown-preview {
+  background-color: #1e1e2e;
+  font-size: 14px;
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview strong {
+  color: #cdd6f4;
+}
+.markdown-preview.markdown-preview blockquote {
+  background-color: #181825;
+  border-left: 4px solid #11111b;
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview h1 {
+  color: #f5e0dc;
+}
+.markdown-preview.markdown-preview h2,
+.markdown-preview.markdown-preview h3,
+.markdown-preview.markdown-preview h4 {
+  color: #b4befe;
+}
+.markdown-preview.markdown-preview p > img {
+  width: 60%;
+}
+.markdown-preview.markdown-preview p:has(> img) {
+  text-align: center;
+}
+.markdown-preview.markdown-preview table {
+  margin: 10px auto 15px auto;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow: auto;
+  word-break: keep-all;
+}
+.markdown-preview.markdown-preview table th {
+  color: #9399b2;
+  text-align: center;
+}
+.markdown-preview.markdown-preview table td {
+  text-align: center;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] {
+  padding: 0.8em;
+  overflow: auto;
+  border-radius: 3px;
+  background-color: #222234;
+}
+.markdown-preview.markdown-preview code {
+  background-color: #222234;
+  color: #94e2d5;
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code {
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .keyword {
+  color: #5ea6dc;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .directive-hash,
+.markdown-preview.markdown-preview pre[class*="language-"] code .punctuation,
+.markdown-preview.markdown-preview pre[class*="language-"] code .operator {
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .function {
+  color: #dcdca1;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .class-name {
+  color: #51d1b9;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .string {
+  color: #d3957b;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .comment {
+  color: #86b367;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .number {
+  color: #9fcea3;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .builtin {
+  color: #ca88c4;
+}
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc {
+  box-shadow: 0 0 0 0 !important;
+  width: 25% !important;
+  background-color: #1e1e2e !important;
+}
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a {
+  color: #89b4fa;
+}
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc-link-wrapper::marker {
+  color: #89b4fa;
+}
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc code {
+  background-color: #222234;
+  color: #94e2d5;
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+a#sidebar-toc-btn {
+  color: #89b4fa !important;
+}
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="constexpr家族限定符的作用">constexpr家族限定符的作用 </h1>
+<br>
+<br>
+<br>
+<h2 id="1-constexpr">1 constexpr </h2>
+<br>
+<h3 id="11-constexpr-变量">1.1 constexpr 变量 </h3>
+<br>
+<p><code>const</code>变量的初始化可以推迟到运行时进行，但是<code>constexpr</code>变量的初始化必须在编译时就进行。对于一些需要常量表达式来初始化的数组，<code>constexpr</code>可以确保变量是常量表达式（<code>constexpr</code>变量蕴含<code>const</code>）：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;array&gt;</span></span>
+
+<span class="token comment">/*
+
+int main() {
+    int len = 3;
+    const int size = len + 1;
+    std::array&lt;int, size&gt; int_arr = {1, 2, 3, 4};
+                    ^^^^
+                    Initializer of 'size' is not a constant expression
+    int int_pod[size] = {1, 2, 3, 4};
+                ^^^^
+                Variable-sized object may not be initialized
+    return 0;
+}
+
+*/</span>
+
+<span class="token comment">/*
+
+int main() {
+    int len = 3;
+    constexpr int size = len + 1;
+                  ^^^^
+                  Constexpr variable 'size' must be initialized by a constant expression
+    std::array&lt;int, size&gt; int_arr = {1, 2, 3, 4};
+    int int_pod[size] = {1, 2, 3, 4};
+    return 0;
+}
+
+*/</span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-constexpr">constexpr</span> <span class="token keyword keyword-int">int</span> size <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>array<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token punctuation">,</span> size<span class="token operator">&gt;</span> int_arr <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> int_pod<span class="token punctuation">[</span>size<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>可以看到第一段注释的代码中的<code>size</code>虽然是<code>const</code>变量，但是它是到运行期才初始化的，由于编译期就需要确定数组边界的容器和 C 风格数组所需要的边界大小必须是在编译期就确定的常量表达式，所以此处会报错。第二段注释的代码中，使用<code>constexpr</code>声明的变量是在编译期就初始化的，因此其必须使用常量表达式来初始化。注意，所有用<code>constexpr</code>声明的变量在运行期也是不能修改的，即其同时是<code>const</code>的。</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword keyword-struct">struct</span> <span class="token class-name">test_class</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> test_num<span class="token punctuation">;</span>
+    <span class="token keyword keyword-constexpr">constexpr</span> <span class="token function">test_class</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> a<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">test_num</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token comment">/*
+        test_class(int a) : test_num(a) {}
+        error : Constexpr variable cannot have non-literal type 'const test_class'
+    */</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-constexpr">constexpr</span> test_class <span class="token function">t</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> t<span class="token punctuation">.</span>test_num <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>这一段代码展现的是使用<code>constexpr</code>声明自定义的类的对象时，必须保证类的构造函数也是<code>constexpr</code>的，至于<code>constexpr</code>函数，这将在下一节提到。</p>
+<br>
+<h3 id="12-constexpr-函数">1.2 constexpr 函数 </h3>
+<br>
+<p><code>constexpr</code>修饰的函数在编译器就能进行计算，当需要在编译期获取<code>constexpr</code>函数的返回值时，函数在编译期就会计算并返回值；当需要在运行期获取<code>constexpr</code>函数的返回值时，函数在运行期会像正常函数一样进行计算。这不需要程序员编写一个函数的非<code>constexpr</code>版本和<code>constexpr</code>版本。</p>
+<p>C++11 引入<code>constexpr</code>限定符之后，<code>constexpr</code>修饰的函数必须只有一个<code>return</code>语句，且内部不能使用局部变量、循环、分支，但是可以调用递归：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token comment">// !!! C++11</span>
+<span class="token keyword keyword-constexpr">constexpr</span> <span class="token keyword keyword-int">int</span> <span class="token function">fibonacci</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-int">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-return">return</span> n <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">||</span> n <span class="token operator">==</span> <span class="token number">2</span> <span class="token operator">?</span> <span class="token number">1</span>
+        <span class="token operator">:</span> <span class="token function">fibonacci</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">fibonacci</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>C++14 之后，<code>constexpr</code>函数也可以有简单的循环和分支语句，内部可以有局部变量，可以有多个<code>return</code>语句：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-constexpr">constexpr</span> <span class="token keyword keyword-int">int</span> <span class="token function">fibonacci</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-int">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword keyword-return">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword keyword-return">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token function">fibonacci</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">fibonacci</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>现在<code>constexpr</code>函数支持以下规则：</p>
+<ul>
+<li>
+<p>可以包含<code>if</code>或者<code>switch</code>语句，以及所有的循环语句，包括<code>for</code>、基于范围的<code>for</code>、<code>while</code>和<code>do-while</code>语句；</p>
+</li>
+<li>
+<p>可以包含局部变量声明，但是对于 C++20 之前的版本，必须初始化变量（C++20 开始就没有这个要求）：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token comment">// !!! &lt; C++20</span>
+<span class="token keyword keyword-constexpr">constexpr</span> <span class="token keyword keyword-void">void</span> <span class="token function">fibonacci</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-int">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> a<span class="token punctuation">;</span>
+<span class="token comment">/*      ^
+        Uninitialized variable in a constexpr function is a C++20 extension
+*/</span>
+<span class="token punctuation">}</span>
+</code></pre></li>
+<li>
+<p>不可以声明非字面类型的变量，以及静态或者线程存储期变量（就是不能使用<code>static</code>和<code>thread_local</code>声明变量）；</p>
+  <!--TODO:这里的字面类型（LiteralType）不是很懂是什么意思，但大概知道一般情况下不会遇到-->
+</li>
+<li>
+<p>不可以包含<code>goto</code>控制流语句，不可以包含除了<code>case</code>以及<code>default</code>外的<code>:</code>标号语句；</p>
+</li>
+<li>
+<p>在 C++20 之前<code>constexpr</code>函数不能是虚函数；</p>
+</li>
+<li>
+<p>在 C++20 之前<code>constexpr</code>函数不能是函数<code>try</code>块；</p>
+</li>
+<li>
+<p>自 C++20 引入协程之后，<code>constexpr</code>函数不能是协程。</p>
+</li>
+</ul>
+<p><code>constexpr</code>函数是隐式内联的：</p>
+<blockquote>
+<p>注：这里再提下内联函数<code>inline</code>是什么，关键字<code>inline</code>建议编译器使用函数定义中的代码替换对该函数的每次调用。理论上使用内联函数可以加速程序运行，因为消除了函数调用关联的开销。调用函数需要将返回地址推送到堆栈、将参数推送到堆栈、跳转到函数体，然后在函数完成时执行返回指令。通过内联函数可以消除这一个过程。注意内联函数的替换操作由编译器自行决定，如果某个函数的地址已被占用或者编译器判定函数过大，就有可能不予内联该函数。</p>
+<p>类声明的主体中定义的函数是隐式内联函数，隐式的则意味着在类中声明的函数是否加<code>inline</code>关键字都是同样的：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-class">class</span> <span class="token class-name">test_class</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-private">private</span><span class="token operator">:</span>
+    std<span class="token double-colon punctuation">::</span>string_view test_str<span class="token punctuation">;</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token function">test_class</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>string_view s<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">test_str</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword keyword-void">void</span> <span class="token function">test_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-inline">inline</span> <span class="token keyword keyword-void">void</span> test_class<span class="token double-colon punctuation">::</span><span class="token function">test_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"This is called by the test_function.\n"</span> 
+              <span class="token operator">&lt;&lt;</span> <span class="token string">"This is the test_str : "</span> 
+              <span class="token operator">&lt;&lt;</span> test_str
+              <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span>
+              <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    test_class <span class="token function">obj</span><span class="token punctuation">(</span><span class="token string">"123"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    obj<span class="token punctuation">.</span><span class="token function">test_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></blockquote>
+<p><code>constexpr</code>函数内部必须产生的都是常量表达式（编译期就能确定的表达式），能计算且能</p>
+<br>
+<h3 id="13-if-constexpr-控制流语句">1.3 if constexpr 控制流语句 </h3>
+<br>
+<p><code>if constexpr</code>的分支语句可以在编译期就确定判断的常量表达式的值，注意如果下面的<code>constexpr</code>省略的话，返回值就有两种情况了，<code>auto</code>并不支持推导出不同的类型：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword keyword-template">template</span><span class="token operator">&lt;</span><span class="token keyword keyword-typename">typename</span> <span class="token class-name">T</span><span class="token operator">&gt;</span>
+<span class="token keyword keyword-auto">auto</span> <span class="token function">print_type_info</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> T<span class="token operator">&amp;</span> t<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token keyword keyword-constexpr">constexpr</span> <span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>is_integral<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token double-colon punctuation">::</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Integer\n"</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-return">return</span> t <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Double\n"</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-return">return</span> t <span class="token operator">+</span> <span class="token number">0.001</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token function">print_type_info</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>   <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span>
+              <span class="token operator">&lt;&lt;</span> <span class="token function">print_type_info</span><span class="token punctuation">(</span><span class="token number">0.2</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>再比如下面的代码用于检测是否是指针类型：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string_view&gt;</span></span>
+
+<span class="token keyword keyword-template">template</span><span class="token operator">&lt;</span><span class="token keyword keyword-typename">typename</span> <span class="token class-name">T</span><span class="token operator">&gt;</span>
+<span class="token keyword keyword-auto">auto</span> <span class="token function">show_value</span><span class="token punctuation">(</span>T t<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token keyword keyword-constexpr">constexpr</span> <span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>is_pointer_v<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Is a pointer.\n"</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-return">return</span> <span class="token operator">*</span>t<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Not a pointer.\n"</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-return">return</span> t<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token double-colon punctuation">::</span>string_view test_str <span class="token operator">=</span> <span class="token string">"Test"</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>string_view<span class="token operator">*</span> test_str_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>test_str<span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token function">show_value</span><span class="token punctuation">(</span>test_str<span class="token punctuation">)</span>     <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span>
+              <span class="token operator">&lt;&lt;</span> <span class="token function">show_value</span><span class="token punctuation">(</span>test_str_ptr<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span>
+              <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p><code>if constexpr</code>语句在编译期计算，编译器只生成与发送到函数模板的参数类型匹配的<code>if</code>分支的代码。该语句判断的、可按语境转换到<code>bool</code>类型的常量表达式将转换为<code>bool</code>类型的常量表达式，如果其值为<code>true</code>，则舍弃<code>false</code>分支，否则舍弃<code>true</code>分支，其中被舍弃语句中的<code>return</code>语句不会参与到函数返回类型推导。</p>
+<br>
+<h2 id="2-consteval">2 consteval </h2>
+<br>
+<h3 id="21-consteval-函数">2.1 consteval 函数 </h3>
+<br>
+<p><code>consteval</code>实际是就是<code>constexpr</code>的补丁，其只能对函数进行声明。我们知道<code>constexpr</code>函数可以在编译期计算，也可以在运行期计算，这是<code>constexpr</code>的自主行为。如果我们不希望一个函数在运行期被调用，而是在编译期就被调用进行计算，那么我们可以使用<code>consteval</code>关键字：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-consteval">consteval</span> <span class="token keyword keyword-int">int</span> <span class="token function">test_squre</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-return">return</span> x <span class="token operator">*</span> x<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">test_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> x <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token function">test_squre</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">/*         ^^^^^^^^^^
+            error: the value of 'x' is not usable in a constant expression
+*/</span>
+<span class="token punctuation">}</span>
+</code></pre><p>上述代码的函数使用到了<code>consteval</code>关键字，于是该函数只能在编译期进行计算，当传入的参数不是常量表达式时，<code>consteval</code>函数就无法在编译期进行计算。<strong>每次调用<code>consteval</code>函数，都必须立即返回编译时常量</strong>。</p>
+<br>
+<h3 id="22-if-consteval-控制流语句">2.2 if consteval 控制流语句 </h3>
+<br>
+<p><code>if consteval</code>本身就是一个条件，它指示<code>constexpr</code>函数在编译期计算时运行该分支，如果是运行期计算则运行另一分支（如果存在的话）。</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword keyword-template">template</span><span class="token operator">&lt;</span><span class="token keyword keyword-typename">typename</span> <span class="token class-name">T</span><span class="token operator">&gt;</span>
+<span class="token keyword keyword-constexpr">constexpr</span> <span class="token keyword keyword-int">int</span> <span class="token function">check_eval</span><span class="token punctuation">(</span>T value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token keyword keyword-consteval">consteval</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-constexpr">constexpr</span> <span class="token keyword keyword-int">int</span> compile_num <span class="token operator">=</span> <span class="token function">check_eval</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> runtime_num <span class="token operator">=</span> <span class="token function">check_eval</span><span class="token punctuation">(</span><span class="token number">3.2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> compile_num <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span>
+              <span class="token operator">&lt;&lt;</span> runtime_num <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>以下三种代码是一致的：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token comment">// 1</span>
+<span class="token keyword keyword-if">if</span> <span class="token keyword keyword-consteval">consteval</span> <span class="token punctuation">{</span>
+    <span class="token function">do_something</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token comment">// 2</span>
+<span class="token keyword keyword-if">if</span> <span class="token operator">not</span> <span class="token keyword keyword-consteval">consteval</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+    <span class="token function">do_somthing</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-if">if</span> <span class="token operator">!</span><span class="token keyword keyword-consteval">consteval</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+    <span class="token function">do_something</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><p>事实上，我们还可以使用<code>type_traits</code>头文件中的<code>std::is_constant_evaluated()</code>函数（这在 C++20 中就有）来代替在 C++23 中才有的<code>if consteval</code>：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;type_traits&gt;</span></span>
+
+<span class="token keyword keyword-template">template</span><span class="token operator">&lt;</span><span class="token keyword keyword-typename">typename</span> <span class="token class-name">T</span><span class="token operator">&gt;</span>
+<span class="token keyword keyword-constexpr">constexpr</span> <span class="token keyword keyword-int">int</span> <span class="token function">check_eval</span><span class="token punctuation">(</span>T value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token function">is_constant_evaluated</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><br>
+<h2 id="3-constinit">3 constinit </h2>
+<br>
+<p>静态存储期的变量和普通的变量一样都会遇到这个问题：</p>
+<ul>
+<li>变量在编译期被初始化（常量初始化）；</li>
+<li>变量在运行期被初始化。</li>
+</ul>
+<p>使用<code>constinit</code>确保静态存储期和线程存储期的变量在程序编译时就确定其值，注意它不蕴含<code>const</code>以及<code>constexpr</code>，但是<code>constexpr</code>蕴含着<code>constinit</code>，但是注意<code>const constinit</code>与<code>constexpr</code>不是等价的。</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;type_traits&gt;</span></span>
+
+<span class="token keyword keyword-template">template</span><span class="token operator">&lt;</span><span class="token keyword keyword-typename">typename</span> <span class="token class-name">T</span><span class="token operator">&gt;</span>
+<span class="token keyword keyword-constexpr">constexpr</span> <span class="token keyword keyword-int">int</span> <span class="token function">check_eval</span><span class="token punctuation">(</span>T value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token function">is_constant_evaluated</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-constinit">constinit</span> <span class="token keyword keyword-static">static</span> <span class="token keyword keyword-int">int</span> test_var <span class="token operator">=</span> <span class="token function">check_eval</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> test_var <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>     <span class="token comment">// 1</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+      <div class="md-sidebar-toc">
+<div class="md-toc">
+<details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#constexpr家族限定符的作用" class="md-toc-link"><p>constexpr家族限定符的作用</p>
+</a>
+          </summary>
+        <div>
+          <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#1-constexpr" class="md-toc-link"><p>1 constexpr</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#11-constexpr-变量" class="md-toc-link">
+            <p>1.1 constexpr 变量</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#12-constexpr-函数" class="md-toc-link">
+            <p>1.2 constexpr 函数</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#13-if-constexpr-控制流语句" class="md-toc-link">
+            <p>1.3 if constexpr 控制流语句</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#2-consteval" class="md-toc-link"><p>2 consteval</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#21-consteval-函数" class="md-toc-link">
+            <p>2.1 consteval 函数</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#22-if-consteval-控制流语句" class="md-toc-link">
+            <p>2.2 if consteval 控制流语句</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#3-constinit" class="md-toc-link">
+            <p>3 constinit</p>
+
+          </a></div>
+        </div>
+      </details>
+    
+</div>
+</div>
+      <a id="sidebar-toc-btn">≡</a>
+    
+    
+    
+    
+    
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>

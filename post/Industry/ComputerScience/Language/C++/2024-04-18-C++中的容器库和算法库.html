@@ -1,0 +1,984 @@
+<!DOCTYPE html><html><head>
+      <title>2024-04-18-C++中的容器库和算法库</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////home/ashgrey/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.8.15/crossnote/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@media screen and (min-width: 914px) {
+  html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+    padding: 2em calc(25% + 2em);
+  }
+  html body[for="html-export"]:not([data-presentation])[html-show-sidebar-toc] .markdown-preview {
+    left: 25%;
+    width: 75%;
+    padding-left: 2em;
+    padding-right: calc(25% + 2em);
+  }
+}
+@media screen and (max-width: 914px) {
+  html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
+    left: 25%;
+    width: 75%;
+    padding: 2em;
+  }
+}
+html {
+  scrollbar-color: #89dceb #1e1e2e;
+}
+.markdown-preview.markdown-preview {
+  background-color: #1e1e2e;
+  font-size: 14px;
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview strong {
+  color: #cdd6f4;
+}
+.markdown-preview.markdown-preview blockquote {
+  background-color: #181825;
+  border-left: 4px solid #11111b;
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview h1 {
+  color: #f5e0dc;
+}
+.markdown-preview.markdown-preview h2,
+.markdown-preview.markdown-preview h3,
+.markdown-preview.markdown-preview h4 {
+  color: #b4befe;
+}
+.markdown-preview.markdown-preview p > img {
+  width: 60%;
+}
+.markdown-preview.markdown-preview p:has(> img) {
+  text-align: center;
+}
+.markdown-preview.markdown-preview table {
+  margin: 10px auto 15px auto;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow: auto;
+  word-break: keep-all;
+}
+.markdown-preview.markdown-preview table th {
+  color: #9399b2;
+  text-align: center;
+}
+.markdown-preview.markdown-preview table td {
+  text-align: center;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] {
+  padding: 0.8em;
+  overflow: auto;
+  border-radius: 3px;
+  background-color: #222234;
+}
+.markdown-preview.markdown-preview code {
+  background-color: #222234;
+  color: #94e2d5;
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code {
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .keyword {
+  color: #5ea6dc;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .directive-hash,
+.markdown-preview.markdown-preview pre[class*="language-"] code .punctuation,
+.markdown-preview.markdown-preview pre[class*="language-"] code .operator {
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .function {
+  color: #dcdca1;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .class-name {
+  color: #51d1b9;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .string {
+  color: #d3957b;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .comment {
+  color: #86b367;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .number {
+  color: #9fcea3;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .builtin {
+  color: #ca88c4;
+}
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc {
+  box-shadow: 0 0 0 0 !important;
+  width: 25% !important;
+  background-color: #1e1e2e !important;
+}
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a {
+  color: #89b4fa;
+}
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc-link-wrapper::marker {
+  color: #89b4fa;
+}
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc code {
+  background-color: #222234;
+  color: #94e2d5;
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+a#sidebar-toc-btn {
+  color: #89b4fa !important;
+}
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<br>
+<h2 id="1-容器与迭代器">1 容器与迭代器 </h2>
+<br>
+<h3 id="11-array">1.1 Array </h3>
+<br>
+<p>Array 容器是一类固定大小的序列容器，它存储固定数量的具有严格的线性顺序的元素，实际上是 STL 对于原生数组的封装，因此性能较高。该容器的性质如下：</p>
+<ul>
+<li>序列性：Array 容器中的元素按照严格的线性顺序排序，各个元素按其在此序列中的位置进行访问；</li>
+<li>内存连续：Array 容器中的元素存储在连续的内存位置中，随机访问其中的元素花费的时间是常数，指向元素的指针可以偏移以访问其他元素；</li>
+<li>大小固定：Array 容器使用隐式构造函数和析构函数静态分配所需要的空间，其大小在编译期间确定。</li>
+</ul>
+<p>Array 的模板定义如下，其中<code>T</code>是数据的类型，<code>N</code>是数据的数量：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-template">template</span> <span class="token operator">&lt;</span><span class="token keyword keyword-class">class</span> <span class="token class-name">T</span><span class="token punctuation">,</span> size_t N<span class="token operator">&gt;</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">array</span><span class="token punctuation">;</span>
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:right">成员函数（不包含迭代器）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"><code>size()</code></td>
+<td style="text-align:center">返回 Array 容器的存储元素的固定大小</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>max_size()</code></td>
+<td style="text-align:center">返回 Array 容器的存储元素的最大大小，这与<code>size()</code>的值一致</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>empty()</code></td>
+<td style="text-align:center">检验容器是否为空，是否为空是指容器大小，而不是容器内是否真的有用户存储的数据（毕竟就是一块内存，也检验不了是否是用户的数据），如果为空，返回<code>true</code></td>
+</tr>
+<tr>
+<td style="text-align:right"><code>operator[]</code></td>
+<td style="text-align:center">重载的数组索引运算符，与数组行为一致，索引越界时获取Array 容器内存块之后的内存数据</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>at(n)</code></td>
+<td style="text-align:center">返回指向索引为<code>n</code>的容器内的元素的引用，索引越界时返回<code>std::out_of_range</code>异常</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>front()</code></td>
+<td style="text-align:center">返回指向第一个元素的引用</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>back()</code></td>
+<td style="text-align:center">返回指向最后一个元素的引用</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>data()</code></td>
+<td style="text-align:center">返回指向第一个元素的指针</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>fill(n)</code></td>
+<td style="text-align:center">将 Array 容器内的所有元素的值都设置为<code>n</code></td>
+</tr>
+<tr>
+<td style="text-align:right"><code>swap(array&amp; x)</code></td>
+<td style="text-align:center">其中<code>x</code>是另一个同类型同大小的 Array 容器，该函数将两个容器的内容进行交换</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h3 id="12-vector">1.2 Vector </h3>
+<br>
+<p>Vector 容器是可以更改容器大小的序列容器，它可能使用动态分配的数组来存储元素，当插入新的元素时，需要分配一个新数组并将所有元素移动到其中，此时 Vector 容器的效率没有 Array 高；它也有可能分配一些额外的存储空间来适应可能的增长，此时的性能和 Array 类似。库可以实施不同的增长策略，以平衡内存使用和重新分配。Vector 消耗更多的内存来换取管理内存和以高效方式动态增长的能力。与其他动态序列容器相比，Vector 容器可以非常高效地访问元素，并且从末尾添加或者删除元素。对于涉及在末尾以外的位置插入或者删除元素的操作，它的性能就比其他操作更差。该容器的性质如下：</p>
+<ul>
+<li>序列性：Vector 容器中的元素按照严格的线性顺序排序，各个元素按其在此序列中的位置进行访问；</li>
+<li>动态数组：内存连续，允许使用指针算术对容器内的元素进行访问；</li>
+<li>使用分配器：Vector 容器使用分配器进行动态内存管理。</li>
+</ul>
+<p>Vector 的模板定义如下，其中<code>T</code>是数据类型，<code>Alloc</code>是分配器对象类型，默认情况下使用分配器类模板，它定义了最简单的内存分配模型：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-template">template</span> <span class="token operator">&lt;</span><span class="token keyword keyword-class">class</span> <span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">Alloc</span> <span class="token operator">=</span> allocator<span class="token operator">&lt;</span>T<span class="token operator">&gt;&gt;</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">vector</span><span class="token punctuation">;</span>
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:right">成员函数（不包含迭代器）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"><code>size()</code></td>
+<td style="text-align:center">返回 Vector 容器中实际有的元素个数，因此不等于最大可存储的元素个数</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>max_size()</code></td>
+<td style="text-align:center">返回 Vector 容器最大可存储的元素个数，一般是很大的数（最大容量）</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>resize(n, val)</code></td>
+<td style="text-align:center">如果<code>n</code>的值比原始的 Vector 容器元素个数小，只保留前<code>n</code>个元素，原始的 Vector 容器中后面的元素将被销毁；如果<code>n</code>的值比原始的 Vector 容器元素个数大，执行元素的插入<code>0</code>直到所有元素的个数为<code>n</code>，如果提供了<code>val</code>的值（这个值是可选的），则插入<code>val</code>而不是<code>0</code>；如果<code>n</code>的值比当前 Vector 容器的可存储个数还大，就会发生 Vector 容器的再分配</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>capacity()</code></td>
+<td style="text-align:center">返回当前分配给 Vector 容器的可存储元素个数（当前容量）</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>empty()</code></td>
+<td style="text-align:center">检查当前 Vector 容器是否为空，如果为空，返回<code>true</code></td>
+</tr>
+<tr>
+<td style="text-align:right"><code>reserve(n)</code></td>
+<td style="text-align:center">该函数要求 Vector 容器的容量至少为<code>n</code>，实际的当前容量可能比<code>n</code>大</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>shrink_tofit()</code></td>
+<td style="text-align:center">该函数将更改当前容量与其实际大小匹配</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>assign(first, last)</code></td>
+<td style="text-align:center">调用时容器中保存的任何元素都被销毁并被从<code>first</code>到<code>last</code>两个迭代器之间的内容替换</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>assgin(n, val)</code></td>
+<td style="text-align:center">调用时容器中保存的任何元素都会被销毁并被新构造的<code>n</code>个<code>val</code>替换，容器大小也会相应改变</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>push_back(val)</code></td>
+<td style="text-align:center">在末尾添加新元素<code>val</code></td>
+</tr>
+<tr>
+<td style="text-align:right"><code>pop_back()</code></td>
+<td style="text-align:center">删除末尾的元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>insert(pos, val)</code></td>
+<td style="text-align:center"><code>pos</code>是插入的位置，是迭代器对象，<code>val</code>是插入的元素（可以是复制也可以是移动）</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>insert(pos, n, val)</code></td>
+<td style="text-align:center">多出来的<code>n</code>是插入相同元素的个数</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>insert(pos, first, last)</code></td>
+<td style="text-align:center">三个都是迭代器，后两个是插入的区间元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>insert(pos, il)</code></td>
+<td style="text-align:center"><code>il</code>是初始化列表</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>erase(pos)</code></td>
+<td style="text-align:center">移除位于迭代器<code>pos</code>位置的元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>erase(first, last)</code></td>
+<td style="text-align:center">移除位于两个迭代器区间中的元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>swap(x)</code></td>
+<td style="text-align:center">其中<code>x</code>是另一个同类型（不要求同大小，因为大小可变）的 Vector 容器</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>clear()</code></td>
+<td style="text-align:center">将 Vector 容器中所有的元素全部删除，留下大小为0的容器</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>emplace(pos, args)</code></td>
+<td style="text-align:center">在指定位置<code>pos</code>前插入元素，只能插入一个</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>emplace_back(args)</code></td>
+<td style="text-align:center">在容器尾部插入元素，只能插入一个</td>
+</tr>
+</tbody>
+</table>
+<p>Vector 容器中的<code>operator[]</code>、<code>at()</code>、<code>front()</code>、<code>back()</code>和<code>data()</code>这几个方法和 Array 容器是一样的。</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector&gt;</span></span>
+
+<span class="token keyword keyword-using">using</span> std<span class="token double-colon punctuation">::</span>cout<span class="token punctuation">;</span>
+<span class="token keyword keyword-using">using</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+<span class="token keyword keyword-using">using</span> std<span class="token double-colon punctuation">::</span>vector<span class="token punctuation">;</span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword keyword-double">double</span><span class="token operator">&gt;</span><span class="token double-colon punctuation">::</span>size_type st<span class="token punctuation">;</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword keyword-double">double</span><span class="token operator">&gt;</span> alice<span class="token punctuation">;</span>
+    st <span class="token operator">=</span> alice<span class="token punctuation">.</span><span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>size_t i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        alice<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i <span class="token operator">/</span> <span class="token number">2.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>st <span class="token operator">!=</span> alice<span class="token punctuation">.</span><span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            st <span class="token operator">=</span> alice<span class="token punctuation">.</span><span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            cout <span class="token operator">&lt;&lt;</span> <span class="token string">"The capacity of alice has changed : "</span> <span class="token operator">&lt;&lt;</span> st <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    vector<span class="token operator">&lt;</span><span class="token keyword keyword-double">double</span><span class="token operator">&gt;</span> bob<span class="token punctuation">;</span>
+    bob<span class="token punctuation">.</span><span class="token function">reserve</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    st <span class="token operator">=</span> alice<span class="token punctuation">.</span><span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>size_t i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">201</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        bob<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i <span class="token operator">/</span> <span class="token number">4.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>st <span class="token operator">!=</span> bob<span class="token punctuation">.</span><span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            st <span class="token operator">=</span> bob<span class="token punctuation">.</span><span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            cout <span class="token operator">&lt;&lt;</span> <span class="token string">"The capacity of bob has changed : "</span> <span class="token operator">&lt;&lt;</span> st <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>该程序的输出如下，可以看到 Vector 容器的当前容量是呈指数上升的，所以在线性写入数据的情况下，进行一次 Vector 容器的内存再分配的时间是呈对数上升的：</p>
+<pre data-role="codeBlock" data-info="plaintext" class="language-plaintext plaintext"><code>The capacity of alice has changed : 1
+The capacity of alice has changed : 2
+The capacity of alice has changed : 4
+The capacity of alice has changed : 8
+The capacity of alice has changed : 16
+The capacity of alice has changed : 32
+The capacity of alice has changed : 64
+The capacity of alice has changed : 128
+The capacity of bob has changed : 100
+The capacity of bob has changed : 200
+The capacity of bob has changed : 400
+</code></pre><p>创建二维的 Vector 容器方法如下：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code>vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span>type<span class="token operator">&gt;&gt;</span> <span class="token function">name</span><span class="token punctuation">(</span>n1<span class="token punctuation">,</span> <span class="token generic-function"><span class="token function">vector</span><span class="token generic class-name"><span class="token operator">&lt;</span>type<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>n2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>其中<code>n1</code>是二维 Vector 容器中的一维容器数量，<code>n2</code>是一维容器中元素的数量。声明二维 Vector 容器之后仍然可以使用<code>[]</code>进行访问容器内的元素。对于容器<code>name</code>来说，所有增加、删除元素的操作都是针对一维数组的。</p>
+<p><code>vector&lt;bool&gt;</code>是 Vector 容器的模板特化，其实现与模板提供的方法有很大出入，有几个注意点如下：</p>
+<ul>
+<li>它不一定是<code>bool</code>类型的数组，标准库有可能优化存储，使得每个值都存储在一个 bit 上；</li>
+<li>元素不是使用分配器对象构造的，值是直接设置在内存中的；</li>
+<li>使用的指针和迭代器类型与模板使用的指针、迭代器不一致，虽然模拟了大多数预期的行为；</li>
+<li>直接访问<code>vector&lt;bool&gt;</code>中的元素返回的是特殊的<code>std::vector&lt;bool&gt;::reference</code>类的对象，该类模拟了<code>bool</code>类型的引用以访问各个 bit。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">成员函数（不包含迭代器）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>flip()</code></td>
+<td style="text-align:center">反转所有的位</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>swap(x)</code></td>
+<td style="text-align:center">其中<code>x</code>是另一个<code>vector&lt;bool&gt;</code>容器，交换两个容器中的元素</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>swap(ref1, ref2)</code></td>
+<td style="text-align:center">交换容器内<code>ref1</code>和<code>ref2</code>的元素，这两个都是特殊的<code>std::vector&lt;bool&gt;::reference</code>对象</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h3 id="13-stack">1.3 Stack </h3>
+<br>
+<p>Stack 容器是模拟满足 LIFO 策略的栈的一种容器，Stack 容器是使用特定容器类（deque）的封装对象作为其底层容器的类，元素从尾端压入/弹出。Stack 容器的一大特点是其没有迭代器。其模板如下：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-template">template</span><span class="token operator">&lt;</span><span class="token keyword keyword-class">class</span> <span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">Container</span> <span class="token operator">=</span> deque<span class="token operator">&lt;</span>T<span class="token operator">&gt;&gt;</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">stack</span><span class="token punctuation">;</span>
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:right">成员函数（Stack 容器没有迭代器）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"><code>empty()</code></td>
+<td style="text-align:center">检查是否是空栈</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>size()</code></td>
+<td style="text-align:center">返回栈的大小</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>top()</code></td>
+<td style="text-align:center">返回栈顶元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>emplace(x)</code></td>
+<td style="text-align:center">向栈压入元素，该方法实际调用底层 Deque 容器的<code>emplace_back</code>方法</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>push(x)</code></td>
+<td style="text-align:center">向栈压入元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>pop()</code></td>
+<td style="text-align:center">从栈中弹出元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>swap(stack&amp; s)</code></td>
+<td style="text-align:center">交换两个栈中的元素</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h3 id="14-queue">1.4 Queue </h3>
+<br>
+<p>Queue 容器是模拟满足 FIFO 策略的队列的一种容器，Queue 容器是使用特定容器类（deque 或者 list）的封装对象作为其底层容器的类（默认情况下，如果没有为特定队列类实例化指定容器类，则使用 deque），元素在尾端入队，在首端出队。Queue 容器也是没有迭代器的容器。其模板如下：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-template">template</span> <span class="token operator">&lt;</span><span class="token keyword keyword-class">class</span> <span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">Container</span> <span class="token operator">=</span> deque<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token operator">&gt;</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">queue</span><span class="token punctuation">;</span>
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:right">成员函数（Queue 容器没有迭代器）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"><code>empty()</code></td>
+<td style="text-align:center">检查队列是否为空</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>size()</code></td>
+<td style="text-align:center">返回队列中元素的个数</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>front()</code></td>
+<td style="text-align:center">返回队列最前面（即将出队）的元素的引用</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>back()</code></td>
+<td style="text-align:center">返回队列最后面（刚入队）的元素的引用</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>push(x)</code></td>
+<td style="text-align:center">向队列入队元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>emplace(x)</code></td>
+<td style="text-align:center">向队列入队元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>pop()</code></td>
+<td style="text-align:center">出队第一个元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>swap(queue&amp; q)</code></td>
+<td style="text-align:center">交换两个队列中的元素</td>
+</tr>
+</tbody>
+</table>
+<p>Priority_queue 容器经过专门的设计，根据严格排序标准，其顶部元素始终是其包含的最大元素，有点类似于堆，可以随时插入元素，并且只能检索最大堆元素。默认情况下，Priority_queue 容器使用 Vector 容器作为底层容器。下面这个程序说明了其顶部元素始终是最大元素的性质：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;queue&gt;</span></span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token double-colon punctuation">::</span>priority_queue<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span> str<span class="token punctuation">;</span>
+    str<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">"sa"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    str<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">"po"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    str<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">"sb"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> str<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// sb</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:center">成员函数（Priority_queue 容器没有迭代器）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>empty()</code></td>
+<td style="text-align:center">检查优先级队列是否为空</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>size()</code></td>
+<td style="text-align:center">返回优先级队列的元素个数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>top()</code></td>
+<td style="text-align:center">返回容器顶部元素（最大元素）的引用</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>push(x)</code></td>
+<td style="text-align:center">向容器插入元素</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>emplace(x)</code></td>
+<td style="text-align:center">向容器插入元素</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>pop()</code></td>
+<td style="text-align:center">弹出顶部元素</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>swap(priority_queue&amp; p)</code></td>
+<td style="text-align:center">交换两个容器内的元素</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h3 id="15-deque">1.5 Deque </h3>
+<br>
+<p>Deque（double-ended queue，双端队列）是在两端都能实现出队、入队的线性容器，属于动态集合。Deque 功能上类似于 Vector 容器，但是在与 Vector 容器不同的是，Deque 容器不保证其存储的元素内存是连续的，由于内存不连续，因此指向 Deque 容器内元素的指针进行指针算术会导致<strong>未定义行为</strong>（UB， undefined behavior）。还有一点不同的是，Deque 容器在两端入队、出队的效率要比 Vector 容器高，尤其是在容器规模较大的情况下，因为 Vector 容器的内存再分配会比较耗时。其模板定义如下：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-template">template</span><span class="token operator">&lt;</span><span class="token keyword keyword-class">class</span> <span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">Alloc</span> <span class="token operator">=</span> allocator<span class="token operator">&lt;</span>T<span class="token operator">&gt;&gt;</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">deque</span><span class="token punctuation">;</span>
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:right">成员函数（不包含迭代器）</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"><code>empty()</code></td>
+<td style="text-align:center">检查双端队列是否为空</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>size()</code></td>
+<td style="text-align:center">返回双端队列大小</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>max_size()</code></td>
+<td style="text-align:center">返回双端队列的最大容量，一般是一个很大的数</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>resize(n, val)</code></td>
+<td style="text-align:center">和 Vector 容器类似</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>shrink_to_fit()</code></td>
+<td style="text-align:center">双端队列占据的内存空间可能比其实际需要的大，该函数与 Vector 容器的类似</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>at(n)</code></td>
+<td style="text-align:center">返回索引为<code>n</code>处的元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>front()</code></td>
+<td style="text-align:center">返回双端队列的首端元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>back()</code></td>
+<td style="text-align:center">返回双端队列的尾端元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>assign(...)</code></td>
+<td style="text-align:center">两个重载的功能都和 Vector 容器类似</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>push_back(x)</code></td>
+<td style="text-align:center">在双端队列尾端入队元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>push_front(x)</code></td>
+<td style="text-align:center">在双端队列首端入队元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>pop_back()</code></td>
+<td style="text-align:center">在双端队列尾端出队元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>pop_front()</code></td>
+<td style="text-align:center">在双端队列首端出队元素</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>insert(...)</code></td>
+<td style="text-align:center">除了不能使用<code>std::initializer_list</code>初始化外，其他三个重载和 Vector 容器类似</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>erase(...)</code></td>
+<td style="text-align:center">移除某元素和移除某范围的两个重载与 Vector 容器类似</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>swap(deque&amp; x)</code></td>
+<td style="text-align:center">交换两个同类型（大小可不一样）的 Deque 容器的内容</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>clear()</code></td>
+<td style="text-align:center">清空容器中的内容</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>emplace(pos, x)</code></td>
+<td style="text-align:center">在<code>pos</code>位置插入元素，使用构造函数的方法</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>emplace_front (x)</code></td>
+<td style="text-align:center">在双端队列的首端插入元素，使用构造函数的方法</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>emplace_back(x)</code></td>
+<td style="text-align:center">在双端队列的尾端插入元素，使用构造函数的方法</td>
+</tr>
+</tbody>
+</table>
+<br>
+<br>
+<br>
+<h2 id="2-initializer_list">2 Initializer_List </h2>
+<br>
+<p>虽然<code>std::initializer_list</code>不是 STL 容器的一部分，但是它具有迭代器的功能和算法的功能，所以我将其放在 STL 容器这一笔记中记录。在 C++ 中，不同的对象有着不同的初始化方法。我们得先从 POD 类型开始介绍：</p>
+<br>
+<h3 id="21-平凡类型">2.1 平凡类型 </h3>
+<br>
+<p>当 C++ 中的类或结构及其成员具有编译器提供的或显式默认设置的构造函数、析构函数时，该类或结构为平凡类型，其占用连续的内存区域。C++ 编译器可以自由选择在此情况下对成员排序的方式，因此可以使用从 C 语言继承的低级函数，从内存中复制此类对象，但是不可以可靠地使用它们。可以使用模板<code>std::is_trival&lt;T&gt;</code>来判断一个类是否是平凡的：</p>
+<p>准确地说，一个类或结构是平凡的，需要满足以下四个条件：</p>
+<ol>
+<li>具有平凡默认构造函数、平凡复制构造函数、平凡复制赋值运算符和平凡析构函数，此处的「平凡」指的是并非由用户提供，而是编译器默认生成的；</li>
+<li>没有虚函数或者虚基类；</li>
+<li>没有具有非平凡构造函数、运算符函数、析构函数的基类；</li>
+<li>没有具有非平凡构造函数、运算符函数、析构函数的数据成员。</li>
+</ol>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string_view&gt;</span></span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_1</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token keyword keyword-int">int</span> a<span class="token punctuation">;</span>
+    <span class="token function">test_class_1</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> input<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">a</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token function">test_class_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword keyword-default">default</span><span class="token punctuation">;</span>
+    <span class="token operator">~</span><span class="token function">test_class_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword keyword-default">default</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_1_delete</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token keyword keyword-int">int</span> a<span class="token punctuation">;</span>
+    <span class="token function">test_class_1_delete</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> input<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">a</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token comment">// test_class_1_delete() = default;</span>
+    <span class="token operator">~</span><span class="token function">test_class_1_delete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword keyword-default">default</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_2</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token keyword keyword-int">int</span> a<span class="token punctuation">;</span>
+    <span class="token keyword keyword-virtual">virtual</span> <span class="token keyword keyword-int">int</span> <span class="token function">get_test_int</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> a<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_3_base</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token keyword keyword-int">int</span> a<span class="token punctuation">;</span>
+    <span class="token keyword keyword-virtual">virtual</span> <span class="token keyword keyword-int">int</span> <span class="token function">get_test_int</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> a<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_3</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword keyword-public">public</span> <span class="token class-name">test_class_3_base</span></span> <span class="token punctuation">{</span>
+    <span class="token comment">// Do nothing</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_4</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    std<span class="token double-colon punctuation">::</span>string_view not_trivial_str<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_5</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-private">private</span><span class="token operator">:</span>
+    <span class="token keyword keyword-int">int</span> a<span class="token punctuation">;</span>
+    <span class="token keyword keyword-double">double</span> b<span class="token punctuation">;</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token function">test_class_5</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword keyword-default">default</span><span class="token punctuation">;</span>
+    <span class="token operator">~</span><span class="token function">test_class_5</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword keyword-default">default</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-template">template</span><span class="token operator">&lt;</span><span class="token keyword keyword-typename">typename</span> <span class="token class-name">T</span><span class="token operator">&gt;</span>
+<span class="token keyword keyword-constexpr">constexpr</span> <span class="token keyword keyword-void">void</span> <span class="token function">test_trivial</span><span class="token punctuation">(</span>T t<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>is_trivial<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token double-colon punctuation">::</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Trivial\n"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Not trivial\n"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">test_trivial</span><span class="token punctuation">(</span><span class="token function">test_class_1</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">// Trivial</span>
+    <span class="token function">test_trivial</span><span class="token punctuation">(</span><span class="token function">test_class_1_delete</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// Not trivial</span>
+    <span class="token function">test_trivial</span><span class="token punctuation">(</span><span class="token function">test_class_2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">// Not trivial</span>
+    <span class="token function">test_trivial</span><span class="token punctuation">(</span><span class="token function">test_class_3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">// Not trivial</span>
+    <span class="token function">test_trivial</span><span class="token punctuation">(</span><span class="token function">test_class_4</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">// Not trivial</span>
+    <span class="token function">test_trivial</span><span class="token punctuation">(</span><span class="token function">test_class_5</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">// Trivial</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><br>
+<h3 id="22-标准布局类型">2.2 标准布局类型 </h3>
+<br>
+<p>当类或结构不包含虚函数、虚基类的时候，并且所有成员都具有相同的访问控制时，该类或结构为标准布局类型。可以在内存中对其进行复制，并且布局是明确定义的，可以为 C 程序使用。明确地说，标准布局类型需要满足以下条件：</p>
+<ol>
+<li>没有虚函数或者虚基类；</li>
+<li>所有非静态数据成员都具有相同的访问控制；</li>
+<li>所有非静态数据成员都是标准布局类型；</li>
+<li>所有基类都是标准布局类型；</li>
+<li>没有与第一个非静态成员类型相同的基类；</li>
+<li>满足以下条件之一
+<ul>
+<li>最底层派生类中没有非静态数据成员，并且具有非静态成员的基类不超过一个；</li>
+<li>没有含非静态成员的基类。</li>
+</ul>
+</li>
+</ol>
+<p>可以使用模板<code>std::is_standard_layout&lt;T&gt;</code>来判断一个类型是否是标准布局类型：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string_view&gt;</span></span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_1</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token keyword keyword-int">int</span> a<span class="token punctuation">;</span>
+    <span class="token keyword keyword-virtual">virtual</span> <span class="token keyword keyword-int">int</span> <span class="token function">get_test_int</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> a<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_2_base</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token keyword keyword-int">int</span> a<span class="token punctuation">;</span>
+    <span class="token keyword keyword-virtual">virtual</span> <span class="token keyword keyword-int">int</span> <span class="token function">get_test_int</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> a<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_2</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword keyword-public">public</span> <span class="token class-name">test_class_2_base</span></span> <span class="token punctuation">{</span>
+    <span class="token comment">// Do nothing</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_3</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-private">private</span><span class="token operator">:</span>
+    <span class="token keyword keyword-int">int</span> a<span class="token punctuation">;</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token keyword keyword-double">double</span> b<span class="token punctuation">;</span>
+    <span class="token function">test_class_3</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword keyword-default">default</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_4</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-private">private</span><span class="token operator">:</span>
+    <span class="token keyword keyword-int">int</span> a<span class="token punctuation">;</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token keyword keyword-int">int</span> <span class="token function">get_test_int</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> a<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_5_base</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token keyword keyword-int">int</span> a<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_5</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword keyword-public">public</span> <span class="token class-name">test_class_5_base</span></span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token keyword keyword-int">int</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_6_base</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Do nothing</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_6</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword keyword-public">public</span> <span class="token class-name">test_class_6_base</span></span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token keyword keyword-int">int</span> a<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_7_base</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token keyword keyword-int">int</span> a<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class_7</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword keyword-public">public</span> <span class="token class-name">test_class_7_base</span></span> <span class="token punctuation">{</span>
+    <span class="token comment">// Do nothing</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-template">template</span><span class="token operator">&lt;</span><span class="token keyword keyword-typename">typename</span> <span class="token class-name">T</span><span class="token operator">&gt;</span>
+<span class="token keyword keyword-constexpr">constexpr</span> <span class="token keyword keyword-void">void</span> <span class="token function">test_standard_layout</span><span class="token punctuation">(</span>T t<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>is_standard_layout<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token double-colon punctuation">::</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Standard\n"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Not Standard\n"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">test_standard_layout</span><span class="token punctuation">(</span><span class="token function">test_class_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Not standard</span>
+    <span class="token function">test_standard_layout</span><span class="token punctuation">(</span><span class="token function">test_class_2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Not standard</span>
+    <span class="token function">test_standard_layout</span><span class="token punctuation">(</span><span class="token function">test_class_3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Not standard</span>
+    <span class="token function">test_standard_layout</span><span class="token punctuation">(</span><span class="token function">test_class_4</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Standard</span>
+    <span class="token function">test_standard_layout</span><span class="token punctuation">(</span><span class="token function">test_class_5</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Not standard</span>
+    <span class="token function">test_standard_layout</span><span class="token punctuation">(</span><span class="token function">test_class_6</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Standard</span>
+    <span class="token function">test_standard_layout</span><span class="token punctuation">(</span><span class="token function">test_class_7</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Standard</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><br>
+<h3 id="23-pod-类型">2.3 POD 类型 </h3>
+<br>
+<p>当某一个类或者结构同时为平凡类型或者标准布局类型时，我们称其为 POD （Plain Old Data，简单旧数据）类型，POD 类型的内存是连续的，并且每个成员的地址都在其之前声明的成员要高。标量类型（例如<code>int</code>）都是 POD 类型，作为类的 POD 类型只能具有作为非静态数据成员的 POD 类型。可以使用模板<code>std::is_pod&lt;T&gt;</code>来判断一个类型是否是 POD 类型。</p>
+<br>
+<h3 id="24-初始化列表">2.4 初始化列表 </h3>
+<br>
+<p>C++ 将初始化列表的概念绑定到类型上，称其为<code>std::initializer_list</code>，使用<code>auto</code>类型推导的时候即可得到这种类型。</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code>    <span class="token keyword keyword-auto">auto</span> test_list <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">//  ^^^^</span>
+<span class="token comment">//  std::initializer_list&lt;int&gt;</span>
+</code></pre><p>C++ 允许构造函数或者其他函数像参数一样使用初始化列表：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;initializer_list&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">test_class</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token operator">&gt;</span> _vec<span class="token punctuation">;</span>
+    <span class="token function">test_class</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>initializer_list<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token operator">&gt;</span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-auto">auto</span> it <span class="token operator">:</span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            _vec<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-void">void</span> <span class="token function">print_info</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-auto">auto</span> it <span class="token operator">:</span> _vec<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> it <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-void">void</span> <span class="token function">another_constructor</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>initializer_list<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token operator">&gt;</span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        _vec<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-auto">auto</span> it <span class="token operator">:</span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            _vec<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    test_class obj <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">//  test_class obj {1, 2, 3};</span>
+    obj<span class="token punctuation">.</span><span class="token function">another_constructor</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    obj<span class="token punctuation">.</span><span class="token function">print_info</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><br>
+<br>
+<br>
+<h2 id="3-pair">3 Pair </h2>
+<br>
+<p><code>std::pair</code>定义在<code>&lt;utility&gt;</code>头文件，是一个非常简单的容器，它可以将两个不同的类型的变量存储在同一个容器中，如同智能指针，其使用<code>std::make_pair</code>初始化：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;utility&gt;</span></span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token double-colon punctuation">::</span>pair<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token punctuation">,</span> <span class="token keyword keyword-double">double</span><span class="token operator">&gt;</span> test <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span><span class="token function">make_pair</span><span class="token punctuation">(</span><span class="token string">"AshGrey"</span><span class="token punctuation">,</span> <span class="token number">20.2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>获取第一个元素可以使用成员变量<code>first</code>,同理第二个为<code>second</code>。<code>std::pair</code>具有类似<code>std::tuple</code>的方法<code>std::get&lt;n&gt;</code>，这里的<code>n</code>自然只能为<code>0</code>和<code>1</code>：</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;utility&gt;</span></span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token double-colon punctuation">::</span>pair<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token punctuation">,</span> <span class="token keyword keyword-double">double</span><span class="token operator">&gt;</span> test <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span><span class="token function">make_pair</span><span class="token punctuation">(</span><span class="token string">"AshGrey"</span><span class="token punctuation">,</span> <span class="token number">20.2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token number">0</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>test<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token number">1</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>test<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> test<span class="token punctuation">.</span>first <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> test<span class="token punctuation">.</span>second<span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><br>
+<h2 id="4-tuple">4 Tuple </h2>
+<br>
+
+      </div>
+      <div class="md-sidebar-toc">
+<div class="md-toc">
+<details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#1-容器与迭代器" class="md-toc-link"><p>1 容器与迭代器</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#11-array" class="md-toc-link">
+            <p>1.1 Array</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#12-vector" class="md-toc-link">
+            <p>1.2 Vector</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#13-stack" class="md-toc-link">
+            <p>1.3 Stack</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#14-queue" class="md-toc-link">
+            <p>1.4 Queue</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#15-deque" class="md-toc-link">
+            <p>1.5 Deque</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#2-initializer_list" class="md-toc-link"><p>2 Initializer_List</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#21-平凡类型" class="md-toc-link">
+            <p>2.1 平凡类型</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#22-标准布局类型" class="md-toc-link">
+            <p>2.2 标准布局类型</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#23-pod-类型" class="md-toc-link">
+            <p>2.3 POD 类型</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#24-初始化列表" class="md-toc-link">
+            <p>2.4 初始化列表</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#3-pair" class="md-toc-link">
+            <p>3 Pair</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#4-tuple" class="md-toc-link">
+            <p>4 Tuple</p>
+
+          </a></div>
+</div>
+</div>
+      <a id="sidebar-toc-btn">≡</a>
+    
+    
+    
+    
+    
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>

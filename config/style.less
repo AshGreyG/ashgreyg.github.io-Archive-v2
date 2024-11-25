@@ -1,0 +1,65 @@
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+@media screen and (min-width: 914px) {
+  html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+    padding: 2em calc(25% + 2em);
+  }
+  html body[for="html-export"]:not([data-presentation])[html-show-sidebar-toc] .markdown-preview {
+    left: 25%;
+    width: 75%;
+    padding-left: 2em;
+    padding-right: calc(25% + 2em);
+  }
+}
+
+@media screen and (max-width: 914px) {
+  html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
+    left: 25%;
+    width: 75%;
+    padding: 2em;
+  }
+}
+
+.markdown-preview.markdown-preview {
+  // modify your style here
+  // eg: background-color: blue;
+
+  
+  background-color: #1e1e2e;
+  font-size: 14px;
+  color: #a6adc8;
+  strong {
+    color: #cdd6f4;
+  }
+  blockquote {
+    background-color: #181825;
+    border-left: 4px solid #11111b;
+    color: #a6adc8;
+  }
+  h2, h3, h4 {
+    color: #b4befe;
+  }
+  p > img {
+    width: 60%;
+  }
+  p:has(> img) {
+    text-align: center;
+  }
+}
+
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc {
+  box-shadow: 0 0 0 0 !important;
+  width: 25% !important;
+  background-color: #1e1e2e !important;
+  a {
+    color: #89b4fa;
+  }
+  .md-toc-link-wrapper::marker {
+    color: #89b4fa;
+  }
+}
+
+a#sidebar-toc-btn {
+  color: #89b4fa !important;
+}
