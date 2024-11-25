@@ -26,9 +26,12 @@
 }
 @media screen and (max-width: 914px) {
   html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
-    left: 25%;
-    width: 75%;
+    left: 50%;
+    width: 100%;
     padding: 2em;
+  }
+  html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc {
+    width: 50% !important;
   }
 }
 html {
@@ -124,7 +127,7 @@ html {
 }
 html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc {
   box-shadow: 0 0 0 0 !important;
-  width: 25% !important;
+  width: 25%;
   background-color: #1e1e2e !important;
 }
 html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a {
