@@ -1,0 +1,300 @@
+<!DOCTYPE html><html><head>
+      <title>2024-09-25-生物化学：糖酵解和糖异生</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@media screen and (min-width: 914px) {
+  html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+    padding: 2em calc(25% + 2em);
+  }
+  html body[for="html-export"]:not([data-presentation])[html-show-sidebar-toc] .markdown-preview {
+    left: 25%;
+    width: 75%;
+    padding-left: 2em;
+    padding-right: calc(25% + 2em);
+  }
+}
+@media screen and (max-width: 914px) {
+  html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
+    left: 50%;
+    width: 100%;
+    padding: 2em;
+  }
+  html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc {
+    width: 50% !important;
+  }
+}
+html {
+  scrollbar-color: #89dceb #1e1e2e;
+}
+.markdown-preview.markdown-preview {
+  background-color: #1e1e2e;
+  font-size: 14px;
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview strong {
+  color: #cdd6f4;
+}
+.markdown-preview.markdown-preview blockquote {
+  background-color: #181825;
+  border-left: 4px solid #11111b;
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview h1 {
+  color: #f5e0dc;
+}
+.markdown-preview.markdown-preview h2,
+.markdown-preview.markdown-preview h3,
+.markdown-preview.markdown-preview h4 {
+  color: #b4befe;
+}
+.markdown-preview.markdown-preview p > img {
+  width: 60%;
+}
+.markdown-preview.markdown-preview p:has(> img) {
+  text-align: center;
+}
+.markdown-preview.markdown-preview table {
+  margin: 10px auto 15px auto;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow: auto;
+  word-break: keep-all;
+}
+.markdown-preview.markdown-preview table th {
+  color: #9399b2;
+  text-align: center;
+}
+.markdown-preview.markdown-preview table td {
+  text-align: center;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] {
+  padding: 0.8em;
+  overflow: auto;
+  border-radius: 3px;
+  background-color: #222234;
+}
+.markdown-preview.markdown-preview code {
+  background-color: #222234;
+  color: #94e2d5;
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code {
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .keyword {
+  color: #5ea6dc;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .directive-hash,
+.markdown-preview.markdown-preview pre[class*="language-"] code .punctuation,
+.markdown-preview.markdown-preview pre[class*="language-"] code .operator {
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .function {
+  color: #dcdca1;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .class-name {
+  color: #51d1b9;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .string {
+  color: #d3957b;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .comment {
+  color: #86b367;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .number {
+  color: #9fcea3;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .builtin {
+  color: #ca88c4;
+}
+.markdown-preview.markdown-preview .footnotes-sep {
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview a {
+  color: #89b4fa;
+}
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc {
+  box-shadow: 0 0 0 0 !important;
+  width: 25%;
+  background-color: #1e1e2e !important;
+}
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a {
+  color: #89b4fa;
+}
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc-link-wrapper::marker {
+  color: #89b4fa;
+}
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc code {
+  background-color: #222234;
+  color: #94e2d5;
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+a#sidebar-toc-btn {
+  color: #89b4fa !important;
+}
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="生物化学糖酵解和糖异生">生物化学：糖酵解和糖异生 </h1>
+<br>
+<br>
+<br>
+<h2 id="1-糖酵解概述">1 糖酵解概述 </h2>
+<br>
+<p>六碳葡萄糖（glucose）分解成两分子的三碳丙酮酸一共需要经历 10 个步骤，其中前 5 个步骤构成了预备阶段。所有的步骤如下：</p>
+<ol>
+<li>ATP 在己糖激酶（hexokinase）的作用下对葡萄糖 C-6 位的羟基进攻，其上发生磷酸化，生成 6-磷酸葡萄糖；</li>
+<li>生成的 6-磷酸葡萄糖在磷酸己糖异构酶（phosphohexoes isomerase）的催化下生成 6-磷酸果糖；</li>
+<li>ATP 在磷酸果糖激酶-1（phosphofructokinase-1）的作用下对 6-磷酸果糖的 C-1 位的羟基进攻，其上发生磷酸化，生成 1,6-二磷酸果糖；</li>
+<li>1,6-二磷酸果糖在醛缩酶的作用下，C-3 和 C-4 间的碳碳键断裂，生成 3-磷酸甘油醛和磷酸二羟丙酮；</li>
+<li>磷酸二羟丙酮在磷酸丙糖异构酶（triose phosphate isomerase）的作用下生成 3-磷酸甘油醛，此时有两分子的 3-磷酸甘油醛；</li>
+<li>在 3-磷酸甘油醛脱氢酶（glyceraldehyde 3-phosphate dehydrogenase）的催化下，3-磷酸甘油醛被 NAD+ 氧化生成 3-磷酸甘油酸，随后和游离的 Pi 反应生成 1,3-二磷酸甘油酸；</li>
+<li>在磷酸甘油酸激酶（phosphoglycerate kinase）的作用下，ADP 从 1,3-二磷酸甘油酸获取一个磷酸基团，生成 ATP 以及 3-磷酸甘油酸的阴离子形式；</li>
+<li>在磷酸甘油酸变位酶（phosphoglycerate mutase）的作用下，C-3 位上的磷酸转移到 C-2 位上；</li>
+<li>在烯醇酶（enolase）的作用下，C-3 上的羟基脱落，C-2 与 C-3 间的碳碳键变为双键，生成磷酸烯醇丙酮酸的阴离子形式；</li>
+<li>在丙酮酸激酶（pyruvate kinase）的作用下，ADP 从磷酸烯醇丙酮酸上获取一个磷酸基团得到 ATP，并生成丙酮酸。</li>
+</ol>
+<p><img src="https://picbed.huaier-ashgrey.top/figure/Screenshot%202024-10-10%20144359.png" alt="图 1.1-1 糖酵解的整体过程"></p>
+<p>生成的丙酮酸在后续的生化反应中也会被氧化，为生命体提供能量。以下是常见的三条代谢途径：</p>
+<ol>
+<li>丙酮酸被氧化，脱羧，生成乙酰辅酶 A 的乙酰基，然后通过柠檬酸循环将乙酰基氧化为二氧化碳。这些氧化产生的电子通过线粒体中的载流子链传递给 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext>O</mtext><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\text{O}_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord text"><span class="mord">O</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，形成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext>H</mtext><mn>2</mn></msub><mtext>O</mtext></mrow><annotation encoding="application/x-tex">\text{H}_2\text{O}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord text"><span class="mord">H</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord text"><span class="mord">O</span></span></span></span></span>，电子传递反应产生的能量驱动线粒体中 ATP 的合成；</li>
+<li>丙酮酸可以通过乳酸发酵将其还原为乳酸。当强烈收缩的骨骼肌必须在低氧条件下才能发挥功能，NADH 不能再被氧化为 NAD+，但 NAD+ 是丙酮酸进一步氧化所必需的电子受体。在这种条件下，丙酮酸被还原为乳酸，接受来自 NADH 的电子，从而再生糖酵解所必须的 NAD+ 继续进行；</li>
+<li>丙酮酸分解代谢的第三条主要途径是导致乙醇的产生。在一些植物组织以及某些无脊椎动物、原生生物和微生物如啤酒酵母或面包酵母中，丙酮酸在缺氧或者无氧条件下转化为乙醇和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext>CO</mtext><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\text{CO}_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord text"><span class="mord">CO</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，这一过程称为乙醇发酵。</li>
+</ol>
+<br>
+<p>糖酵解的整体反应方程式如下：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right" columnspacing=""><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mtext>Glucose</mtext><mo>+</mo><mn>2</mn><msup><mtext>NAD</mtext><mo>+</mo></msup><mo>+</mo><mn>2</mn><mtext>ADP</mtext><mo>+</mo><mn>2</mn><msub><mtext>P</mtext><mtext>i</mtext></msub></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo>⟶</mo><mn>2</mn><mtext>pyruvate</mtext><mo>+</mo><mn>2</mn><mtext>NADH</mtext><mo>+</mo><mn>2</mn><msup><mtext>H</mtext><mo>+</mo></msup><mo>+</mo><mn>2</mn><mtext>ATP</mtext><mo>+</mo><mn>2</mn><msub><mtext>H</mtext><mn>2</mn></msub><mtext>O</mtext></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+        \text{Glucose}+2\text{NAD}^++2\text{ADP}+2\text{P}_{\text{i}}\\
+        \longrightarrow2\text{pyruvate}+2\text{NADH}+2\text{H}^++2\text{ATP}+2\text{H}_2\text{O}
+    \end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.0091em;vertical-align:-1.2546em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.7546em;"><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">Glucose</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span><span class="mord"><span class="mord text"><span class="mord">NAD</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8446em;"><span style="top:-3.1362em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">+</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span><span class="mord text"><span class="mord">ADP</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span><span class="mord"><span class="mord text"><span class="mord">P</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3175em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">i</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.4054em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mrel">⟶</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">2</span><span class="mord text"><span class="mord">pyruvate</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span><span class="mord text"><span class="mord">NADH</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span><span class="mord"><span class="mord text"><span class="mord">H</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8446em;"><span style="top:-3.1362em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">+</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span><span class="mord text"><span class="mord">ATP</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span><span class="mord"><span class="mord text"><span class="mord">H</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord text"><span class="mord">O</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2546em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+<br>
+<h3 id="11-第一步">1.1 第一步 </h3>
+<br>
+<p>第一步是葡萄糖的磷酸化，葡萄糖在 C-6 位被磷酸化，生成 6-磷酸葡萄糖，这一步反应以 ATP 作为磷酸基团供体，激活后续的反应。</p>
+<p>这一步反应在细胞内条件下是不可逆的，由己糖激酶催化。激酶是催化末端磷酰基从 ATP 转移到亲核受体的酶，是<strong>转移酶</strong>的一个亚类。己糖激酶的受体是己糖，正常情况下是 D-葡萄糖，尽管己糖激酶也催化一些组织中其他常见的己糖的磷酸化，例如 D-果糖和 D-甘露糖。</p>
+<p>己糖激酶的活性需要 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mtext>Mg</mtext><mrow><mn>2</mn><mo>+</mo></mrow></msup></mrow><annotation encoding="application/x-tex">\text{Mg}^{2+}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0818em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord text"><span class="mord">Mg</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8873em;"><span style="top:-3.1362em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">+</span></span></span></span></span></span></span></span></span></span></span></span>，该酶的真正底物不是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mtext>ATP</mtext><mrow><mn>4</mn><mo>−</mo></mrow></msup></mrow><annotation encoding="application/x-tex">\text{ATP}^{4-}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8873em;"></span><span class="mord"><span class="mord text"><span class="mord">ATP</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8873em;"><span style="top:-3.1362em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span><span class="mord mtight">−</span></span></span></span></span></span></span></span></span></span></span></span>，而是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mtext>MgATP</mtext><mrow><mn>2</mn><mo>−</mo></mrow></msup></mrow><annotation encoding="application/x-tex">\text{MgATP}^{2-}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0818em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord text"><span class="mord">MgATP</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8873em;"><span style="top:-3.1362em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">−</span></span></span></span></span></span></span></span></span></span></span></span>。<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mtext>Mg</mtext><mrow><mn>2</mn><mo>+</mo></mrow></msup></mrow><annotation encoding="application/x-tex">\text{Mg}^{2+}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0818em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord text"><span class="mord">Mg</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8873em;"><span style="top:-3.1362em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">+</span></span></span></span></span></span></span></span></span></span></span></span> 屏蔽了 ATP 中磷酰基的负电荷，使得末端磷原子更容易被葡萄糖的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span> 羟基亲核进攻。当己糖激酶和葡萄糖结合时，它的形状就发生了变化，即诱导契合。当 ATP 与它们结合时，该蛋白的两个结构域相互靠近约 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mover accent="true"><mtext>A</mtext><mo>˚</mo></mover></mrow><annotation encoding="application/x-tex">8\r \text{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9468em;"></span><span class="mord">8</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord text"><span class="mord">A</span></span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.375em;"><span class="mord">˚</span></span></span></span></span></span></span></span></span></span>。这种移动使结合的 ATP 更加接近于一分子同样与酶结合的葡萄糖，并阻止水的进入（因为水可能会进攻活性位点，如使 ATP 的磷酸酐键水解）。己糖激酶和糖酵解的其他九种酶一样，都是可溶性的胞浆蛋白。</p>
+<p>己糖激酶几乎存在于所有的生物体种。人类基因组编码 4 种不同的己糖激酶，它们都催化相同的反应。催化同一反应但由不同基因编码的两种或者两种以上的酶称为<strong>同工酶</strong>（isozymes）。</p>
+<p><img src="https://picbed.huaier-ashgrey.top/figure/Screenshot%202024-10-12%20221948.png" alt="图 1.1-2 糖酵解第一步：葡萄糖的磷酸化"></p>
+<br>
+<h3 id="12-第二步">1.2 第二步 </h3>
+<br>
+<p>糖酵解的第二步是 6-磷酸葡萄糖向 6-磷酸果糖的转化。磷酸己糖异构酶催化醛糖 6-磷酸葡萄糖可逆异构化为酮糖 6-磷酸果糖。这一反应的机理涉及烯二醇中间体，反应在任何方向上都容易进行。6-磷酸葡萄糖断裂 1号位碳和氧的键，开环，活性中心谷氨酸夺取质子导致顺式烯二醇的形成，同时谷氨酸也有利于催化 6-磷酸果糖的形成。烯二醇转换为酮，重新组成一个五元环的 6-磷酸果糖：</p>
+<p><img src="https://picbed.huaier-ashgrey.top/figure/Screenshot%202024-10-15%20120436.png" alt="图 1.1-3 糖酵解第二步：6-磷酸葡萄糖异构为 6-磷酸果糖"></p>
+<br>
+<h3 id="13-第三步">1.3 第三步 </h3>
+<br>
+<p>糖酵解的第三步是 6-磷酸果糖磷酸化为 1,6-二磷酸果糖。磷酸果糖激酶-1（PFK-1）催化一个磷酸基从 ATP 转移到 6-磷酸果糖，生成 1,6-二磷酸果糖。PFK-1 反应在细胞条件下本质上是不可逆的。一些细菌和原生生物，（可能）所有的植物都有磷酸果糖激酶，但是它们使用焦磷酸而不是 ATP 作为合成 1,6-二磷酸果糖的磷酰基供体：</p>
+<p><img src="https://picbed.huaier-ashgrey.top/figure/Screenshot%202024-10-19%20152944.png" alt="图 1.1-4 糖酵解第三步：6-磷酸果糖磷酸化为 1,6-二磷酸果糖"></p>
+<br>
+<h3 id="14-第四步">1.4 第四步 </h3>
+<br>
+<p>糖酵解的第四步是 1,6-二磷酸果糖的裂解。果糖二磷酸醛缩酶，通常被称为醛缩酶，催化可逆的羟醛缩合反应，1,6-二磷酸果糖裂解产生两种不同的磷酸三糖：3-磷酸甘油醛和磷酸二羟基丙酮：</p>
+<p><img src="https://picbed.huaier-ashgrey.top/figure/Screenshot%202024-10-20%20182653.png" alt="图 1.1-5 糖酵解第四步：1,6-二磷酸裂解"></p>
+<p>醛缩酶有两类，在动植物中发现的Ⅰ类缩醛酶，其使用的机理如下：</p>
+<ol>
+<li>首先果糖的五元环打开，活性中心 Lys（赖氨酸）进攻底物羰基，导致四面体中间体的形成；</li>
+<li>重排使得在酶上形成质子化的 Shiff 碱<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>（在氮原子上连的是赖氨酸），从底物上脱落下水分子，原本被进攻的羰基在第 1 步形成的羟基脱落，导致 2 号位碳原子与氮原子间形成双键；</li>
+<li>3 号位和 4 号位碳原子间的共价键断裂，4,5,6 号位碳链化合物，即 3-磷酸甘油醛脱落。剩余部分的底物的 2 号位碳原子依旧与 Lys 相连；</li>
+<li>异构化，谷氨酸活性中心上的氢原子跑到底物上；</li>
+<li>Shiff 碱水解，第二种产物脱落，即磷酸二羟基丙酮。</li>
+</ol>
+<p><img src="https://picbed.huaier-ashgrey.top/figure/Screenshot%202024-11-26%20210700.png" alt="图 1.1-6 糖酵解第四步的详细步骤"></p>
+<p>在真菌和细菌中的 II 类醛缩酶不形成 Shiff 中间体，而是使用活性位点的锌离子与 2 号位的羰基氧进行配位，锌离子极化羰基，并且稳定在第 3 步中形成的烯醇化合物。</p>
+<br>
+<h3 id="15-第五步">1.5 第五步 </h3>
+<br>
+<p>糖酵解的第五步是磷酸丙糖的相互转化。在醛缩酶形成的两种磷酸丙糖中，只有 3-磷酸甘油醛才能在糖酵解的后续步骤中得到直接降解。在第五步中，另一种产物磷酸二羟基丙酮被磷酸丙糖异构酶</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Shiff 碱，翻译为席夫碱，是一类在氮原子上连有烷基或芳基的较为稳定的亚胺 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+      </div>
+      <div class="md-sidebar-toc">
+<div class="md-toc">
+<details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#生物化学糖酵解和糖异生" class="md-toc-link"><p>生物化学：糖酵解和糖异生</p>
+</a>
+          </summary>
+        <div>
+          <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#1-糖酵解概述" class="md-toc-link"><p>1 糖酵解概述</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#11-第一步" class="md-toc-link">
+            <p>1.1 第一步</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#12-第二步" class="md-toc-link">
+            <p>1.2 第二步</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#13-第三步" class="md-toc-link">
+            <p>1.3 第三步</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#14-第四步" class="md-toc-link">
+            <p>1.4 第四步</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#15-第五步" class="md-toc-link">
+            <p>1.5 第五步</p>
+
+          </a></div>
+        </div>
+      </details>
+    
+        </div>
+      </details>
+    
+</div>
+</div>
+      <a id="sidebar-toc-btn">≡</a>
+    
+    
+    
+    
+    
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>

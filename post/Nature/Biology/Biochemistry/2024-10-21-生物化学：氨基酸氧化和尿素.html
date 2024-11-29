@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="file:////home/ashgrey/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.8.15/crossnote/dependencies/katex/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
       
       
       
@@ -15,14 +15,27 @@
 /*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
 @media screen and (min-width: 914px) {
   html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
-    padding: 2em calc(60.45% - 457px + 2em);
+    padding: 2em calc(25% + 2em);
+  }
+  html body[for="html-export"]:not([data-presentation])[html-show-sidebar-toc] .markdown-preview {
+    left: 25%;
+    width: 75%;
+    padding-left: 2em;
+    padding-right: calc(25% + 2em);
   }
 }
-@media screen and (max-width: 1274px) {
-  html body[for="html-export"]:not([data-presentation])[html-show-sidebar-toc] .markdown-preview {
-    padding-left: 2em;
-    padding-right: calc(75% - 611px);
+@media screen and (max-width: 914px) {
+  html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
+    left: 50%;
+    width: 100%;
+    padding: 2em;
   }
+  html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc {
+    width: 50% !important;
+  }
+}
+html {
+  scrollbar-color: #89dceb #1e1e2e;
 }
 .markdown-preview.markdown-preview {
   background-color: #1e1e2e;
@@ -37,6 +50,9 @@
   border-left: 4px solid #11111b;
   color: #a6adc8;
 }
+.markdown-preview.markdown-preview h1 {
+  color: #f5e0dc;
+}
 .markdown-preview.markdown-preview h2,
 .markdown-preview.markdown-preview h3,
 .markdown-preview.markdown-preview h4 {
@@ -48,14 +64,82 @@
 .markdown-preview.markdown-preview p:has(> img) {
   text-align: center;
 }
-.md-sidebar-toc {
+.markdown-preview.markdown-preview table {
+  margin: 10px auto 15px auto;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow: auto;
+  word-break: keep-all;
+}
+.markdown-preview.markdown-preview table th {
+  color: #9399b2;
+  text-align: center;
+}
+.markdown-preview.markdown-preview table td {
+  text-align: center;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] {
+  padding: 0.8em;
+  overflow: auto;
+  border-radius: 3px;
+  background-color: #222234;
+}
+.markdown-preview.markdown-preview code {
+  background-color: #222234;
+  color: #94e2d5;
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code {
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .keyword {
+  color: #5ea6dc;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .directive-hash,
+.markdown-preview.markdown-preview pre[class*="language-"] code .punctuation,
+.markdown-preview.markdown-preview pre[class*="language-"] code .operator {
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .function {
+  color: #dcdca1;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .class-name {
+  color: #51d1b9;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .string {
+  color: #d3957b;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .comment {
+  color: #86b367;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .number {
+  color: #9fcea3;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .builtin {
+  color: #ca88c4;
+}
+.markdown-preview.markdown-preview .footnotes-sep {
+  color: #a6adc8;
+}
+.markdown-preview.markdown-preview a {
+  color: #89b4fa;
+}
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc {
+  box-shadow: 0 0 0 0 !important;
+  width: 25%;
   background-color: #1e1e2e !important;
 }
-.md-sidebar-toc a {
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a {
   color: #89b4fa;
 }
-.md-sidebar-toc .md-toc-link-wrapper::marker {
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc-link-wrapper::marker {
   color: #89b4fa;
+}
+html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc code {
+  background-color: #222234;
+  color: #94e2d5;
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 a#sidebar-toc-btn {
   color: #89b4fa !important;
