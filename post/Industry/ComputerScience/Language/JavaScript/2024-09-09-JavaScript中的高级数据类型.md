@@ -1,17 +1,15 @@
 ---
-title: JavaScript中的高级数据类型
-author: AshGrey
-date: 2024-09-09 00:00:00 +0800
-categories: [Computer Science, Language]
-tags: [Computer Science, JavaScript]
+html:
+  cdn_hosted: true
+export_on_save:
+  html: true
 ---
 
-> 本文章所属领域：
->
-> [实践产业知识 - 工业产业 - 计算机科学 - 编程语言 - JavaScript]({% post_url /Computer Science/2024-02-08-计算机科学：索引笔记 %})
-> 
-> 本篇文章因为[「JavaScript基础知识笔记」]({%post_url /Computer Science/2024-02-16-JavaScript基础知识笔记%}) 篇幅有限，故转移至此
-{: .prompt-info}
+# JavaScript 中的高级数据类型
+
+<br>
+
+<br>
 
 <br>
 
@@ -24,8 +22,6 @@ tags: [Computer Science, JavaScript]
 - 注意`for-of`循环仅适用于这个被返回的对象；
 - 当`for-of`循环需要下一个数值时，则调用该对象的`next()`方法；
 - `next()`方法返回的结果的格式必须是`{done : Boolean, value : any}`的，当`done`为`true`时，表示循环结束。
-
-<br>
 
 ``` javascript
 class CollatzRange {
@@ -61,15 +57,9 @@ for (let value of test) {
 alert(output);
 ```
 
-<br>
-
 我们需要注意可迭代对象和类数组对象之间的区别：可迭代对象是实现了`next()`以及`Symbol.iterator`的方法的对象，类数组对象（array-like）是有索引和`length`属性的对象。JavaScript 中提供的数组和字符串是既可迭代的又是类数组的。
 
-<br>
-
 全局方法`Array.from`方法接受一个可迭代或者类数组的值，其返回一个真正意义上的数组，可以对返回的这个数组调用数组方法。其第一个参数是可迭代对象或者类数组对象，第二个参数是一个映射函数，其只接受两个参数（`element`和`index`）
-
-<br>
 
 ``` javascript
 const images = document.querySelectorAll("img");
@@ -93,8 +83,6 @@ for (let url of sources) {
 
 与 Python 中的 dict 类似，JavaScript 提供 Map，Map 是一个带键的数据项的集合。其方法和属性如下：
 
-<br>
-
 |属性/方法|说明|
 |---:|:---:|
 |`new Map()`|创建一个 Map|
@@ -108,8 +96,6 @@ for (let url of sources) {
 |`get(key)`|根据键返回值，如果不存在这个键返回`undefined`|
 |`has(key)`|如果`key`存在返回`true`，如果不存在则返回`false`|
 |`forEach(fn)`|以插入顺序为 Map 对象中的每个键值对调用一次函数`fn`|
-
-<br>
 
 ``` javascript
 let testMap = new Map();
@@ -127,11 +113,7 @@ for (list of testMap) {
 }
 ```
 
-<br>
-
 Map 和 Objetc 之间可以相互转换：从 Object 生成 Map 可以使用`Object.entries()`，从 Map 生成 Object 可以使用`Object.fromEntries()`。
-
-<br>
 
 ``` javascript
 let testObject = {
@@ -143,7 +125,6 @@ let testMap = new Map();
 testMap.set('name', 'huaier')
        .set('spouse', 'AshGrey')
        .set('age', 17);
-
 
 let keyValueListToMap = new Map([
   ['name', 'AshGrey'],
