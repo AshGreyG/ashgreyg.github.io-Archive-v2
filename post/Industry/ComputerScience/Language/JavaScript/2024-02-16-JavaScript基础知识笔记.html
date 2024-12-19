@@ -96,7 +96,9 @@ html {
 .markdown-preview.markdown-preview pre[class*="language-"] code {
   color: #a6adc8;
 }
-.markdown-preview.markdown-preview pre[class*="language-"] code .keyword {
+.markdown-preview.markdown-preview pre[class*="language-"] code .keyword,
+.markdown-preview.markdown-preview pre[class*="language-"] code .dom,
+.markdown-preview.markdown-preview pre[class*="language-"] code .attr-name {
   color: #5ea6dc;
 }
 .markdown-preview.markdown-preview pre[class*="language-"] code .directive-hash,
@@ -110,7 +112,8 @@ html {
 .markdown-preview.markdown-preview pre[class*="language-"] code .class-name {
   color: #51d1b9;
 }
-.markdown-preview.markdown-preview pre[class*="language-"] code .string {
+.markdown-preview.markdown-preview pre[class*="language-"] code .string,
+.markdown-preview.markdown-preview pre[class*="language-"] code .attr-value {
   color: #d3957b;
 }
 .markdown-preview.markdown-preview pre[class*="language-"] code .comment {
@@ -121,6 +124,11 @@ html {
 }
 .markdown-preview.markdown-preview pre[class*="language-"] code .builtin {
   color: #ca88c4;
+}
+.markdown-preview.markdown-preview pre[class*="language-"] code .tag,
+.markdown-preview.markdown-preview pre[class*="language-"] code .name,
+.markdown-preview.markdown-preview pre[class*="language-"] code .doctype {
+  color: #7287fd;
 }
 .markdown-preview.markdown-preview .footnotes-sep {
   color: #a6adc8;
@@ -2033,6 +2041,50 @@ love <span class="token operator">=</span> <span class="token string">"AshGrey"<
   <span class="token function">setTimeout</span><span class="token punctuation">(</span>run<span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre><p>在这里实际就是使用了<code>setTimeout()</code>函数的无穷递归调用。</p>
+<br>
+<br>
+<br>
+<h2 id="6-promise">6 Promise </h2>
+<br>
+<p>假设我有一段代码需要另一段代码的结果，需要知道这段代码是否执行成功，我们可以写出这样的回调函数：</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript javascript"><code><span class="token keyword keyword-function">function</span> <span class="token function">loadScript</span><span class="token punctuation">(</span><span class="token parameter">src<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword keyword-let">let</span> script <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span><span class="token string">'script'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  script<span class="token punctuation">.</span><span class="token property-access">src</span> <span class="token operator">=</span> src<span class="token punctuation">;</span>
+
+  script<span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">onload</span>  <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword null nil keyword-null">null</span><span class="token punctuation">,</span> script<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  script<span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">onerror</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword keyword-new">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Script load error for </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>src<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token property-access">head</span><span class="token punctuation">.</span><span class="token method function property-access">append</span><span class="token punctuation">(</span>script<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">loadScript</span><span class="token punctuation">(</span><span class="token string">'./my/script.js'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">error<span class="token punctuation">,</span> script</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow keyword-if">if</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// handle error</span>
+  <span class="token punctuation">}</span> <span class="token keyword control-flow keyword-else">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// script loaded successfully</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>这看起来既处理了加载另一段代码时可能出现的错误，又处理了正常加载的结果，看起来是解决了我们的问题。但是如果我们需要异步加载很多很多段代码呢？我们的代码看上去会是下面那样：</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript javascript"><code><span class="token function">loadScript</span><span class="token punctuation">(</span><span class="token string">'./1.js'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">error<span class="token punctuation">,</span> script</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow keyword-if">if</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">handleError</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword control-flow keyword-else">else</span> <span class="token punctuation">{</span>
+    <span class="token function">loadScript</span><span class="token punctuation">(</span><span class="token string">'./2.js'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">error<span class="token punctuation">,</span> script</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword control-flow keyword-if">if</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">handleError</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword control-flow keyword-else">else</span> <span class="token punctuation">{</span>
+        <span class="token function">loadScript</span><span class="token punctuation">(</span><span class="token string">'./3.js'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">error<span class="token punctuation">,</span> script</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token comment">// ...</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>这种处理异步加载的代码称为<strong>回调地狱</strong>（pyramid of doom），因为这里嵌套了很多层。为了解决这种需要异步加载的代码，JavaScript 规范支持了 Promise 对象，Promise 对象的构造函数如下：</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript javascript"><code><span class="token keyword keyword-let">let</span> myPromise <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token keyword keyword-function">function</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// executor, the producing code</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Promise 对象构造函数内的函数称为<strong>执行函数</strong>（executor），该执行函数的参数<code>resolve</code>和<code>reject</code>是 JavaScript 自动提供的</p>
 
       </div>
       <div class="md-sidebar-toc">
@@ -2340,7 +2392,11 @@ love <span class="token operator">=</span> <span class="token string">"AshGrey"<
           </a></div>
         </div>
       </details>
-    
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#6-promise" class="md-toc-link">
+            <p>6 Promise</p>
+
+          </a></div>
         </div>
       </details>
     

@@ -2037,6 +2037,8 @@ let user = new User('AshGrey');
 setTimeout(user.printInfo, 100)
 ```
 
+
+
 <br>
 
 <br>
@@ -2284,3 +2286,65 @@ setTimeout(function run() {
 ```
 
 在这里实际就是使用了`setTimeout()`函数的无穷递归调用。
+
+<br>
+
+<br>
+
+<br>
+
+## 6 Promise
+
+<br>
+
+假设我有一段代码需要另一段代码的结果，需要知道这段代码是否执行成功，我们可以写出这样的回调函数：
+
+``` javascript
+function loadScript(src, callback) {
+  let script = document.createElement('script');
+  script.src = src;
+
+  script.onload  = () => callback(null, script);
+  script.onerror = () => callback(new Error(`Script load error for ${src}`));
+
+  document.head.append(script);
+}
+
+loadScript('./my/script.js', (error, script) => {
+  if (error) {
+    // handle error
+  } else {
+    // script loaded successfully
+  }
+});
+```
+
+这看起来既处理了加载另一段代码时可能出现的错误，又处理了正常加载的结果，看起来是解决了我们的问题。但是如果我们需要异步加载很多很多段代码呢？我们的代码看上去会是下面那样：
+
+``` javascript
+loadScript('./1.js', (error, script) => {
+  if (error) {
+    handleError(error);
+  } else {
+    loadScript('./2.js', (error, script) => {
+      if (error) {
+        handleError(error);
+      } else {
+        loadScript('./3.js', (error, script) => {
+          // ...
+        });
+      }
+    });
+  }
+});
+```
+
+这种处理异步加载的代码称为**回调地狱**（pyramid of doom），因为这里嵌套了很多层。为了解决这种需要异步加载的代码，JavaScript 规范支持了 Promise 对象，Promise 对象的构造函数如下：
+
+``` javascript
+let myPromise = new Promise(function(resolve, reject) {
+  // executor, the producing code
+});
+```
+
+Promise 对象构造函数内的函数称为**执行函数**（executor），该执行函数的参数`resolve`和`reject`是 JavaScript 自动提供的
